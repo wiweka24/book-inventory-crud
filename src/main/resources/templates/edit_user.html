@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header::header"></div>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebar::sidebar"></div>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- navbar -->
+                <div th:replace="fragments/navbar::navbar"></div>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800 mb-4">Create</h1>
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/users/{id} (id=${user.id})}" th:object = "${user}" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control" 
+                                        id="name" 
+                                        placeholder="Name"
+                                        th:field="*{name}"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input 
+                                        type="email" 
+                                        class="form-control" 
+                                        id="email" 
+                                        placeholder="email"
+                                        th:field="*{email}"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">password</label>
+                                    <input 
+                                        type="password" 
+                                        class="form-control" 
+                                        id="password" 
+                                        placeholder="password"
+                                        th:field="*{password}"
+                                    >
+                                </div>
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select  class="form-control" th:field="*{role}" id="role">
+                                        <option th:value="' '" th:text="'Select Role'"></option>
+                                        <option th:value="'STAFF'" th:text="STAFF"></option>
+                                        <option th:value="'ADMIN'" th:text="ADMIN"></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input 
+                                        type="text" 
+                                        class="form-control"
+                                        th:field="*{address}"
+                                        placeholder="address"
+                                        id="address"
+                                    >
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label for="picture">picture</label>
+                                    <input 
+                                        type="file" 
+                                        class="form-control"
+                                        placeholder="picture"
+                                        name="picture"
+                                        id="picture"
+                                    >
+                                </div> -->
+                                <button type="submit" class="btn btn-primary mt-4 btn-block">Update</button>
+                                <a th:href = "@{/users}" class="btn btn-outline-secondary btn-block">Back</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <div th:replace="fragments/footer::footer"></div>
+        </div>
+    </div>
+    <div th:replace="fragments/scripts::scripts"></div>
+
+</body>
+
+</html>
