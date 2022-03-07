@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.core.io.SerializedString;
+
 @Entity
 @Table(name = "books")
 public class Book {
@@ -32,12 +34,15 @@ public class Book {
 	
 	@Column(name = "stock")
 	private Long stock;
+
+	@Column(name = "description")
+	private String description;
 	
 	public Book() {
 		
 	}
 	
-	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock) {
+	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description) {
 		super();
 		this.title = title;
 		this.category = category;
@@ -45,6 +50,7 @@ public class Book {
 		this.publisher = publisher;
 		this.date = date;
 		this.stock = stock;
+		this.description = description;
 	}
 	public Long getId() {
 		return id;
@@ -87,5 +93,11 @@ public class Book {
 	}
 	public void setStock(Long stock) {
 		this.stock = stock;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

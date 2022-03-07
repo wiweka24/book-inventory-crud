@@ -58,7 +58,7 @@
             <!-- End of Main Content -->
             
             <!-- Footer -->
-            <div th:replace="fragments/footer::footer"></div>
+            
             
         </div>
         <!-- End of Content Wrapper -->
@@ -66,9 +66,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    <div th:replace="fragments/scrolltop::scrolltop"></div>
 
     <!-- Book Detail Modal -->
     <div th:each = "book: ${books}" class="modal fade" th:attr="id=${'book-detail' + book.id}">
@@ -86,26 +84,26 @@
                             <img th:src="@{/img/book-1.jpg}" alt="" width="100%">
                         </div>
                         <div class="col-md-8">
-                            <label>Title</label>
+                            <label class="pt-2">Title</label>
                             <input type="text" class="form-control" th:value = "${book.title}" readonly>
 
-                            <label>Category</label>
+                            <label class="pt-2">Category</label>
                             <input type="text" class="form-control" th:value="${book.category}" readonly>
 
-                            <label>Author</label>
+                            <label class="pt-2">Author</label>
                             <input type="text" class="form-control" th:value="${book.author}" readonly>
 
-                            <label>Publisher</label>
+                            <label class="pt-2">Publisher</label>
                             <input type="text" class="form-control" th:value="${book.publisher}" readonly>
 
-                            <label>Date Publish</label>
+                            <label class="pt-2">Date Publish</label>
                             <input type="text" class="form-control" th:value="${book.date}" readonly>
                             
-                            <label>Stock</label>
+                            <label class="pt-2">Stock</label>
                             <input type="number" class="form-control" th:value="${book.stock}" readonly>
 
-                            <label>Description</label>
-                            <textarea class="form-control" cols="30" rows="10" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, sit porro eius perferendis ad eveniet esse. Distinctio blanditiis quibusdam deserunt rerum molestias dolorem amet iure veritatis eveniet? Sint, molestiae adipisci.</textarea>
+                            <label class="pt-2">Description</label>
+                            <textarea type="text" class="form-control" rows="10" th:text="${book.description}" readonly></textarea>
                         </div>
                     </div>
                 </div>

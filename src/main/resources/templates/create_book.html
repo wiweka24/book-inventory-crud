@@ -98,6 +98,18 @@
                                     />
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Description</label>
+                                    <textarea                                        
+                                        type = "text"
+                                        rows="5"
+                                        name = "description"
+                                        th:field = "*{description}"
+                                        class = "form-control"
+                                        placeholder="more about the book ..." 
+                                    />
+                                </div>
+
                                 <button type="submit" class="btn btn-primary mt-4 btn-block">Submit</button>
                                 <a th:href = "@{/books}" class="btn btn-outline-secondary btn-block">Back</a>
                             </form>
@@ -118,9 +130,7 @@
     <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-	</a>
+    <div th:replace="fragments/scrolltop::scrolltop"></div>
 
     <div th:replace="fragments/scripts::scripts"></div>
 

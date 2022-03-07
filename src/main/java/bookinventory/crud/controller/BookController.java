@@ -57,7 +57,11 @@ public class BookController {
 		existingBook.setId(id);
 		existingBook.setTitle(book.getTitle());
 		existingBook.setCategory(book.getCategory());
+		existingBook.setAuthor(book.getAuthor());
+		existingBook.setPublisher(book.getPublisher());
+		existingBook.setDate(book.getDate());
 		existingBook.setStock(book.getStock());
+		existingBook.setDescription(book.getDescription());
 		
 		// save updated book object
 		bookService.updateBook(existingBook);
