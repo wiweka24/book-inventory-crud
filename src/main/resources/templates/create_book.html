@@ -22,7 +22,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800 mb-4">Create</h1>
+                    <h1 class="h3 mb-2 text-gray-800 mb-4">Input New Book</h1>
                     <div class="card">
                         <div class="card-body">
                             <form th:action="@{/books}" th:object = "${book}" method="POST">
@@ -55,6 +55,39 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Author</label>
+                                    <input
+                                        type = "text"
+                                        name = "author"
+                                        th:field = "*{author}"
+                                        class = "form-control"
+                                        placeholder="athor" 
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Publisher</label>
+                                    <input
+                                        type = "text"
+                                        name = "publisher"
+                                        th:field = "*{publisher}"
+                                        class = "form-control"
+                                        placeholder="publisher" 
+                                    />
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Date Publish</label>
+                                    <input                                
+                                        type = "date"
+                                        name = "date"
+                                        th:field = "*{date}"
+                                        class = "form-control"
+                                        placeholder="date" 
+                                    />
+                                </div>
+
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Stock</label>
                                     <input
                                         type = "number"
@@ -62,6 +95,18 @@
                                         th:field = "*{stock}"
                                         class = "form-control"
                                         placeholder="enter stock" 
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Description</label>
+                                    <textarea                                        
+                                        type = "text"
+                                        rows="5"
+                                        name = "description"
+                                        th:field = "*{description}"
+                                        class = "form-control"
+                                        placeholder="more about the book ..." 
                                     />
                                 </div>
 
@@ -78,8 +123,15 @@
 
             <!-- Footer -->
             <div th:replace="fragments/footer::footer"></div>
+            
         </div>
+        <!-- End of Content Wrapper -->
     </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <div th:replace="fragments/scrolltop::scrolltop"></div>
+
     <div th:replace="fragments/scripts::scripts"></div>
 
 </body>
