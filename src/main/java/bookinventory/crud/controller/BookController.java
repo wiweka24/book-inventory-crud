@@ -70,5 +70,5 @@ public class BookController {
 	public String deleteBook(@PathVariable Long id) {
 		bookService.deleteBookById(id);
 		return "redirect:/books";
-	}	
+	}
 }

@@ -184,7 +184,7 @@
                                 <td th:text = "${book.category}"></td>
                                 <td th:text = "${book.stock}"></td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-eye" data-toggle="modal" data-target="#book-detail"></i></a>
+                                    <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-eye" data-toggle="modal" th:attr="data-target=${'#book-detail' + book.id}" data-row="${book}"></i></a>
                                     <a th:href = "@{/books/edit/{id}(id=${book.id})}" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></a>
                                     <a th:href = "@{/books/{id}(id=${book.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
                                 </td>
@@ -220,7 +220,7 @@
     </a>
 
     <!-- Book Detail Modal -->
-    <div class="modal fade" id="book-detail">
+    <div th:each = "book: ${books}" class="modal fade" th:attr="id=${'book-detail' + book.id}">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
@@ -236,22 +236,22 @@
                         </div>
                         <div class="col-md-8">
                             <label>Title</label>
-                            <input type="text" class="form-control" value="Atomic Habits" readonly>
+                            <input type="text" class="form-control" th:value = "${book.title}" readonly>
 
                             <label>Category</label>
-                            <input type="text" class="form-control" value="Self Improvment" readonly>
+                            <input type="text" class="form-control" th:value="${book.category}" readonly>
 
                             <label>Author</label>
-                            <input type="text" class="form-control" value="lorem" readonly>
+                            <input type="text" class="form-control" th:value="${book.author}" readonly>
 
                             <label>Publisher</label>
-                            <input type="text" class="form-control" value="lorem" readonly>
+                            <input type="text" class="form-control" th:value="${book.publisher}" readonly>
 
                             <label>Date Publish</label>
-                            <input type="text" class="form-control" value="25/01/2019" readonly>
+                            <input type="text" class="form-control" th:value="${book.date}" readonly>
                             
                             <label>Stock</label>
-                            <input type="number" class="form-control" value="20" readonly>
+                            <input type="number" class="form-control" th:value="${book.stock}" readonly>
 
                             <label>Description</label>
                             <textarea class="form-control" cols="30" rows="10" readonly>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, sit porro eius perferendis ad eveniet esse. Distinctio blanditiis quibusdam deserunt rerum molestias dolorem amet iure veritatis eveniet? Sint, molestiae adipisci.</textarea>
