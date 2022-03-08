@@ -38,6 +38,17 @@
             <span>Users Management</span></a>
         </li>
 
+        <!-- Nav Item - Tables -->
+        <li class="nav-item">
+            <form method="POST" th:action="@{/logout}">
+                <a class="nav-link" th:href="@{/logout}" onclick="event.preventDefault();
+                this.closest('form').submit();">
+                    <i class="fas fa-fw fa-power-off"></i>
+                    <span>Logout</span>
+                </a>
+            </form>
+            
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 
