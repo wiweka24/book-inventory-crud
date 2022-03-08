@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header::header"></div>
+
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="fragments/sidebar::sidebar"></div>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- navbar -->
+                <div th:replace="fragments/navbar::navbar"></div>
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">User List</h1>
+                    <a th:href = "@{/users/new}" class="btn btn-md btn-primary mt-4">Create</a>
+                    <!-- DataTales Example -->
+                    <div class="table-responsive mt-3">
+                        <table class="table">
+                        <!-- id="dataTable"  -->
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each = "user: ${users}">
+                                    <th scope="row" th:text = "${user.id}"></th>
+                                    <td th:text = "${user.name}"></td>
+                                    <td th:text = "${user.email}"></td>
+                                    <td th:text = "${user.role}"></td>
+                                    <td>
+                                        <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-eye" data-toggle="modal" data-target="#user-detail"></i></a>
+                                        <a th:href = "@{/users/edit/{id}(id=${user.id})}" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></a>
+                                        <a th:href = "@{/users/delete/{id}(id=${user.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <div th:replace="fragments/footer::footer"></div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button-->
+    <div th:replace="fragments/scrolltop::scrolltop"></div>
+
+    <div th:replace="fragments/scripts::scripts"></div>
+
+</body>
+
+</html>
