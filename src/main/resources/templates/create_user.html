@@ -25,7 +25,7 @@
                     <h1 class="h3 mb-2 text-gray-800 mb-4">Create User</h1>
                     <div class="card">
                         <div class="card-body">
-                            <form th:action="@{/users}" th:object = "${user}" method="POST" >
+                            <form th:action="@{/users}" th:object = "${user}" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input 
@@ -74,16 +74,19 @@
                                         id="address"
                                     >
                                 </div>
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="picture">picture</label>
                                     <input 
                                         type="file" 
                                         class="form-control"
-                                        placeholder="picture"
                                         name="picture"
                                         id="picture"
+                                        accept="image/png, image/jpeg"
                                     >
-                                </div> -->
+                                </div>
+                                <div class="form-group">
+                                    <img id="thumbnail" alt="Logo Preview" width="100">
+                                </div>
                                 <button type="submit" class="btn btn-primary mt-4 btn-block">Submit</button>
                                 <a th:href = "@{/users}" class="btn btn-outline-secondary btn-block">Back</a>
                             </form>
@@ -104,7 +107,31 @@
     <div th:replace="fragments/scrolltop::scrolltop"></div>
 
     <div th:replace="fragments/scripts::scripts"></div>
+    <script>
+        $(document).ready(function(){
+            $('#picture').change(function(){
+                showImageThumbnail(this);
+            });
+        })
 
+        function showImageThumbnail(fileInput){
+            if(fileInput.files && fileInput.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#thumbnail').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+            // file = fileInput.files[0];
+            // reader = new FileReader();
+
+            // reader.onload = function(e){
+            //     $('#thumbnail').attr('src', e.target.result);
+            // }
+
+            // reader.readAsDataURL(file);
+        }
+    </script>
 </body>
 
 </html>
