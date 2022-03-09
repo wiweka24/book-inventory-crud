@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="fragments/header::header"></div>
+
+<body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+            <div th:replace="fragments/sidebar::sidebar"></div>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <div th:replace="fragments/navbar::navbar"></div>
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <h1 class="h3 mb-2 text-gray-800">Book Categories List</h1>
+
+                <!-- Button Create Categories -->
+                <a th:href="@{/categories/new}" class="btn btn-primary btn-icon-split btn-sm">
+                <span class="icon text-white-50">
+                  <i class="fa-solid fa-plus"></i>
+                </span>
+                    <span class="text">Create</span>
+                </a>
+                <!-- <a href="book-create.html" class="btn btn-md btn-primary mt-4">Create</a> -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Table Book Categories</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Book Categories</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each = "category: ${categories}">
+                                    <td th:text = "${category.id}">1</td>
+                                    <td th:text = "${category.name}"></td>
+                                    <td>
+                                        <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="btn btn-sm btn-warning"><i class="fas fa-pen"></i></a>
+                                        <a th:href="@{/categories/{id}(id=${category.id})}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <div th:replace="fragments/footer::footer"></div>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<div th:replace="fragments/scrolltop::scrolltop"></div>
+
+<div th:replace="fragments/scripts::scripts"></div>
+
+</body>
+
+</html>

@@ -44,4 +44,10 @@ public class UserRepositoryTest {
         User user = repo.findByEmail(email);
         assertThat(user).isNotNull();
     }
+
+    @Test
+    public void testUpdateUser(){
+        User user = new User();
+
+    }
 }
