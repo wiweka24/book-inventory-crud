@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
         User savedUser = userRepository.save(user);
 
-        String uploadDir = "./user-pictures/" + savedUser.getId();
+        String uploadDir = "./src/main/resources/static/img/user-pictures/" + savedUser.getId();
 
         Path uploadPath = Paths.get(uploadDir);
 

@@ -1,7 +1,11 @@
 package bookinventory.crud.service.impl;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,31 +33,37 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public Book saveBook(Book book, MultipartFile multipartFile) throws IOException {
-
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        
-		if(fileName == null){
-			book.setCover(null);
-		}
-
+		
 		book.setCover(fileName);
 
 		Book savedBook = bookRepository.save(book);
-
-		String uploadDir = "./book-cover/" + savedBook.getId();
-
+		
+		String uploadDir = "./src/main/resources/static/img/book-cover/" + savedBook.getId();
+		
 		Path uploadPath = Paths.get(uploadDir);
 
-		if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
+		try {
+            if(!fileName.isEmpty()){
+                if(!Files.exists(uploadPath)){
+                    Files.createDirectories(uploadPath);
+                }
+            }
+
+        } catch (IOException e){
+            throw new IOException("Failed to create directory");
         }
          
-        try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException ioe) {        
-            throw new IOException("Could not save image file: " + fileName, ioe);
-        }   
+        if(!fileName.isEmpty()){
+            try( InputStream inputStream = multipartFile.getInputStream()) {
+                Path filePath = uploadPath.resolve(fileName);
+                Files.copy(inputStream, filePath , StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                throw new IOException("Failed to store file " + fileName + "!");
+            }
+        } else {
+            book.setCover(null);
+        } 
 
 		return savedBook;
 	}
