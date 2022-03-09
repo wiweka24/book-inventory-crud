@@ -25,7 +25,7 @@
                     <h1 class="h3 mb-2 text-gray-800 mb-4">Input New Book</h1>
                     <div class="card">
                         <div class="card-body">
-                            <form th:action="@{/books}" th:object = "${book}" method="POST">
+                            <form th:action="@{/books}" th:object = "${book}" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Title</label>
                                     <input
@@ -34,6 +34,17 @@
                                         th:field = "*{title}"
                                         class = "form-control"
                                         placeholder="book title ..." 
+                                    />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Cover</label>
+                                    <input
+                                        type = "file"
+                                        name = "file"
+                                        th:field = "*{cover}"
+                                        class = "form-control"
+                                        accept = "image/png, image/jpeg"
                                     />
                                 </div>
                                 

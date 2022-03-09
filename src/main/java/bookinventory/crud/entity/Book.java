@@ -37,12 +37,15 @@ public class Book {
 
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "cover")
+    private String cover;
 	
 	public Book() {
 		
 	}
 	
-	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description) {
+	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description, String cover) {
 		super();
 		this.title = title;
 		this.category = category;
@@ -51,6 +54,7 @@ public class Book {
 		this.date = date;
 		this.stock = stock;
 		this.description = description;
+		this.cover = cover;
 	}
 	public Long getId() {
 		return id;
@@ -99,5 +103,11 @@ public class Book {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 }
