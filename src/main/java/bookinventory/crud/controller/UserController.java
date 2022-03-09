@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -45,30 +46,10 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public String saveUser(@ModelAttribute("user") User user, @RequestParam("picture") String file) throws IOException {
-        //String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        System.out.println(file);
-        // user.setPicture(fileName);
-        // User saveUser = userService.saveUser(user);
+    public String saveUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
+        user.setPassword(userService.ecryptPassword(user.getPassword()));
 
-        // String uploadDir = "./user-pictures/" + saveUser.getId();
-
-        // Path uploadPath = Paths.get(uploadDir);
-
-        // if(!Files.exists(uploadPath)){
-        //     Files.createDirectories(uploadPath);
-        // }
-        
-        // try( InputStream inputStream = file.getInputStream()) {
-        //     Path filePath = uploadPath.resolve(fileName);
-        //     System.out.println(filePath.toFile().getAbsolutePath());
-        //     Files.copy(inputStream, filePath ,StandardCopyOption.REPLACE_EXISTING);
-        // } catch (IOException e) {
-        //     throw new IOException("Failed to store file " + fileName + "!");
-        // }
-       
-       
-
+        User saveUser = userService.saveUser(user, file);
 
         return "redirect:/users";
     }
@@ -82,18 +63,24 @@ public class UserController {
     @PostMapping("/users/{id}")
     public String updateUser(@PathVariable Long id,
             @ModelAttribute("user") User user,
-            Model model) {
+            Model model){
 
         // get book from database by id
         User existingUser = userService.getUserById(id);
         existingUser.setId(id);
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
-        existingUser.setPassword(user.getPassword());
         existingUser.setRole(user.getRole());
-
+        existingUser.setPicture(user.getPicture());
+        existingUser.setAddress(user.getAddress());
+        if(user.getPassword() == null){
+            user.setPassword(null);
+        } else {
+            existingUser.setPassword(userService.ecryptPassword(existingUser.getPassword()));
+        }
+        System.out.println(user.getPicture());
         // save updated user object
-        userService.updateUser(existingUser);
+        //userService.updateUser(existingUser);
         return "redirect:/users";
     }
 
