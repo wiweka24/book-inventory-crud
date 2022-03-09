@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.core.io.SerializedString;
 
 @Entity
-@Table(name = "books")
+@Table(name = "products")
 public class Book {
 	
 	@Id
