@@ -49,7 +49,7 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
         user.setPassword(userService.ecryptPassword(user.getPassword()));
 
-        User saveUser = userService.saveUser(user, file);
+        userService.saveUser(user, file);
 
         return "redirect:/users";
     }

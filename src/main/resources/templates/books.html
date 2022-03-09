@@ -80,8 +80,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <img th:src="@{/img/book-1.jpg}" alt="" width="100%">
+                        <div class="col-md-4 pt-4">
+                            <img th:src="@{${'/img/book-cover/' + book.id + '/' + book.cover}}" alt="" width="100%">
                         </div>
                         <div class="col-md-8">
                             <label class="pt-2">Title</label>

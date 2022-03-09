@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.core.io.SerializedString;
-
 @Entity
 @Table(name = "books")
 public class Book {
@@ -37,12 +35,18 @@ public class Book {
 
 	@Column(name = "description")
 	private String description;
+
+	@Column(name = "cover", length = 64)
+    private String cover;
+
+	// @ManyToOne
+	// private Categories cat;
 	
 	public Book() {
 		
 	}
 	
-	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description) {
+	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description, String cover) {
 		super();
 		this.title = title;
 		this.category = category;
@@ -51,6 +55,7 @@ public class Book {
 		this.date = date;
 		this.stock = stock;
 		this.description = description;
+		this.cover = cover;
 	}
 	public Long getId() {
 		return id;
@@ -99,5 +104,11 @@ public class Book {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getCover() {
+		return cover;
+	}
+	public void setCover(String cover) {
+		this.cover = cover;
 	}
 }
