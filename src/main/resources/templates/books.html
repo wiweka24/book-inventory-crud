@@ -22,7 +22,13 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Book List</h1>
-                    <a th:href = "@{/books/new}" class="btn btn-md btn-primary mt-4">Create</a>
+                    <!-- Button Create books -->
+                    <a th:href="@{/categories/new}" class="btn btn-primary btn-icon-split btn-sm">
+                        <span class="icon text-white-50">
+                          <i class="fa-solid fa-plus"></i>
+                        </span>
+                        <span class="text">Create</span>
+                    </a>
                     <!-- DataTales Example -->
                     <div class="table-responsive mt-3">
                         <table class="table">

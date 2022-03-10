@@ -1,17 +1,10 @@
 package bookinventory.crud.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import bookinventory.crud.dto.SearchFormData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +28,7 @@ public class UserController {
     @GetMapping("/users")
     public String listUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("searchForm", new SearchFormData());
         return "users";
     }
 
@@ -61,26 +55,22 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}")
-    public String updateUser(@PathVariable Long id,
-            @ModelAttribute("user") User user,
-            Model model){
-
+    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User user, Model model, @RequestParam("file") MultipartFile file) throws IOException{
         // get book from database by id
         User existingUser = userService.getUserById(id);
         existingUser.setId(id);
         existingUser.setName(user.getName());
         existingUser.setEmail(user.getEmail());
         existingUser.setRole(user.getRole());
-        existingUser.setPicture(user.getPicture());
         existingUser.setAddress(user.getAddress());
         if(user.getPassword() == null){
             user.setPassword(null);
         } else {
-            existingUser.setPassword(userService.ecryptPassword(existingUser.getPassword()));
+            String password = userService.ecryptPassword(user.getPassword());
+            existingUser.setPassword(password);
         }
-        System.out.println(user.getPicture());
         // save updated user object
-        //userService.updateUser(existingUser);
+        userService.updateUser(existingUser, file);
         return "redirect:/users";
     }
 
@@ -89,5 +79,12 @@ public class UserController {
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUserById(id);
         return "redirect:/users";
+    }
+
+    @PostMapping("/search")
+    public String search(SearchFormData searchFormData, Model model){
+        model.addAttribute("searchForm", searchFormData);
+        model.addAttribute("users", userService.findByName(searchFormData.getKeyword()));
+        return "users";
     }
 }

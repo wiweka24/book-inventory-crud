@@ -57,6 +57,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
               .defaultSuccessUrl("/books")
               .permitAll()
             .and()
-            .logout().logoutSuccessUrl("/").permitAll();
+              .logout().logoutSuccessUrl("/").permitAll();
   }
 }

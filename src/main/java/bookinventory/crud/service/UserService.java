@@ -13,9 +13,11 @@ public interface UserService {
 
     User getUserById(Long id);
 	
-    User updateUser(User user);
+    User updateUser(User user, MultipartFile multipartFile)  throws IOException;
 
     void deleteUserById(Long id);
 
     String ecryptPassword(String password);
+
+    Iterable<User> findByName(String keyword);
 }

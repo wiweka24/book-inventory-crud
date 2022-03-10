@@ -22,7 +22,24 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">User List</h1>
-                    <a th:href = "@{/users/new}" class="btn btn-md btn-primary mt-4">Create</a>
+                    <!-- Button Create users -->
+                    <a th:href="@{/categories/new}" class="btn btn-primary btn-icon-split btn-sm">
+                        <span class="icon text-white-50">
+                          <i class="fa-solid fa-plus"></i>
+                        </span>
+                        <span class="text">Create</span>
+                    </a>
+                    <!-- Topbar Search -->
+                    <form class="d-none d-sm-inline-block form-inline my-2 my-md-0 mw-100 navbar-search" th:action="@{/search}" th:object="${searchForm}" method="POST">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search By Name" aria-label="Search" aria-describedby="basic-addon2" th:field="*{keyword}">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <!-- DataTales Example -->
                     <div class="table-responsive mt-3">
                         <table class="table">
