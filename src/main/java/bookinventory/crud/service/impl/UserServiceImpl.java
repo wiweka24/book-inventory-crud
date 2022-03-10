@@ -32,12 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String ecryptPassword(String password){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.encode(password);
-    }
-
-    @Override
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }

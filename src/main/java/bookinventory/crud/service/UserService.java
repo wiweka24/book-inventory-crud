@@ -17,7 +17,5 @@ public interface UserService {
 
     void deleteUserById(Long id);
 
-    String ecryptPassword(String password);
-
     Iterable<User> findByName(String keyword);
 }

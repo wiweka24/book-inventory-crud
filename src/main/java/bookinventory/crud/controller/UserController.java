@@ -3,6 +3,7 @@ package bookinventory.crud.controller;
 import java.io.IOException;
 
 import bookinventory.crud.dto.SearchFormData;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,7 @@ public class UserController {
 
     @PostMapping("/users")
     public String saveUser(@ModelAttribute("user") User user, @RequestParam("file") MultipartFile file) throws IOException {
-        user.setPassword(userService.ecryptPassword(user.getPassword()));
+        user.setPassword(encodePassword(user.getPassword(), user));
 
         userService.saveUser(user, file);
 
@@ -66,8 +67,7 @@ public class UserController {
         if(user.getPassword() == null){
             user.setPassword(null);
         } else {
-            String password = userService.ecryptPassword(user.getPassword());
-            existingUser.setPassword(password);
+            existingUser.setPassword(encodePassword(user.getPassword(), user));
         }
         // save updated user object
         userService.updateUser(existingUser, file);
@@ -86,5 +86,11 @@ public class UserController {
         model.addAttribute("searchForm", searchFormData);
         model.addAttribute("users", userService.findByName(searchFormData.getKeyword()));
         return "users";
+    }
+
+    public String encodePassword(String password, User user){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encodedPassword = encoder.encode(user.getPassword());
+        return encodedPassword;
     }
 }
