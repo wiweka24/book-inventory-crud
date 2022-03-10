@@ -15,4 +15,55 @@
     <!-- Page for table -->
     <script th:src="@{/js/demo/datatables-demo.js}"></script>
 
+    <script>
+        const 
+        weather = document.querySelector(".weather-info"),
+        wIcon = weather.querySelector("img");
+
+        let api;
+
+        function getCoordintes() {
+            navigator.geolocation.getCurrentPosition(onSuccess);
+
+            function requestApi(city){
+                api = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=6e01cd4cb9b7e216dd4e58eea143b7c2`;
+                fetchData();
+            }
+
+            function onSuccess(position){
+                const {latitude, longitude} = position.coords;
+                api = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=6e01cd4cb9b7e216dd4e58eea143b7c2`;
+                
+                fetch(api).then(res => res.json()).then(result => weatherDetails(result)).catch(() =>{
+                });
+            }
+
+            function weatherDetails(info){
+                const city = info.name;
+                const {id} = info.weather[0];
+                const {temp} = info.main;
+
+                if(id == 800){
+                    wIcon.src = "/img/icons/clear.svg";
+                }else if(id >= 200 && id <= 232){
+                    wIcon.src = "/img/icons/storm.svg";
+                }else if(id >= 600 && id <= 622){
+                    wIcon.src = "/img/icons/snow.svg";
+                }else if(id >= 701 && id <= 781){
+                    wIcon.src = "/img/icons/haze.svg";
+                }else if(id >= 801 && id <= 804){
+                    wIcon.src = "/img/icons/cloud.svg";
+                }else if((id >= 500 && id <= 531) || (id >= 300 && id <= 321)){
+                    wIcon.src = "/img/icons/rain.svg";
+                }
+                
+                weather.querySelector(".temp").innerText = Math.floor(temp);
+                weather.querySelector(".location").innerText = `${city}`;
+                }
+            }
+
+        getCoordintes();
+
+    </script>
+
 </div>
