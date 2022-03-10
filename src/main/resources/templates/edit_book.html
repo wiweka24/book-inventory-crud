@@ -25,7 +25,7 @@
                         <div class="card-body">
                             <form th:action="@{/books/{id} (id=${book.id})}" th:object = "${book}" method="POST">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Title</label>
+                                    <label for="title">Title</label>
                                     <input
                                         type = "text"
                                         name = "title"
@@ -34,22 +34,27 @@
                                         placeholder="book title ..." 
                                     />
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="cover">Cover</label>
+                                    <input
+                                        type = "file"
+                                        class = "form-control pt-1"
+                                        name = "file"
+                                        id = "picture"
+                                        accept = "image/png, image/jpeg"
+                                    />
+                                </div>
                                 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Category</label>
-                                    <input
-                                        type = "text"
-                                        name = "category"
-                                        th:field = "*{category}"
-                                        class = "form-control"
-                                        placeholder="category" 
-                                    />
-                                    <!-- <select name="" id="" class="form-control">
-                                        <option disabled selected>select-category</option>
-                                        <option value="">Self Improvment</option>
-                                        <option value="">Teknologi</option>
-                                        <option value="">Kesehatan</option>
-                                    </select> -->
+                                    <label for="category">Category</label>
+                                    <select class="form-control" th:field = "*{category}">
+                                        <option 
+                                            th:each = "cat: ${categoriesList}"
+                                            th:value = "${cat.name}"
+                                            th:text = "${cat.name}">
+                                        </option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
@@ -59,7 +64,7 @@
                                         name = "author"
                                         th:field = "*{author}"
                                         class = "form-control"
-                                        placeholder="athor" 
+                                        placeholder="author" 
                                     />
                                 </div>
 
@@ -98,7 +103,7 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Description</label>
-                                    <textarea
+                                    <textarea                                        
                                         type = "text"
                                         rows="5"
                                         name = "description"
