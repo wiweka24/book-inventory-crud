@@ -23,7 +23,7 @@
                     <h1 class="h3 mb-2 text-gray-800 mb-4">Update User</h1>
                     <div class="card">
                         <div class="card-body">
-                            <form th:action="@{/users/{id} (id=${user.id})}" th:object = "${user}" method="POST">
+                            <form th:action="@{/users/{id} (id=${user.id})}" th:object = "${user}" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input 

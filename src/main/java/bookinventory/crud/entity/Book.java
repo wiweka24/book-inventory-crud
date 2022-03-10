@@ -1,11 +1,6 @@
 package bookinventory.crud.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "books")
@@ -39,12 +34,10 @@ public class Book {
 	@Column(name = "cover", length = 64)
     private String cover;
 
-	// @ManyToOne
-	// private Categories cat;
-	
-	public Book() {
-		
-	}
+	@ManyToOne
+	private Categories categories;
+
+	public Book() {}
 	
 	public Book(String title, String category, String author, String publisher, java.sql.Date date, Long stock, String description, String cover) {
 		super();
@@ -110,5 +103,13 @@ public class Book {
 	}
 	public void setCover(String cover) {
 		this.cover = cover;
+	}
+
+	public Categories getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Categories categories) {
+		this.categories = categories;
 	}
 }
