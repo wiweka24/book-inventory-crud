@@ -29,7 +29,6 @@ public class UserController {
     @GetMapping("/users")
     public String listUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("searchForm", new SearchFormData());
         return "users";
     }
 
