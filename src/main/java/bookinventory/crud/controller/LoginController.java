@@ -9,9 +9,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -20,16 +22,12 @@ public class LoginController {
   @Autowired
   private UserRepository userRepository;
 
-  @GetMapping("/")
-  public String viewLogin(Model model, @Valid User user, BindingResult bindingResult){
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+  @GetMapping("/login")
+  public String viewLogin(Model model, User user, BindingResult bindingResult){
     if(bindingResult.hasErrors()){
       return "index";
     }
-    if(authentication == null || authentication instanceof AnonymousAuthenticationToken){
-      return "index";
-    }
-    return "redirect:/books";
+    return "index";
   }
 
   @GetMapping("/register")
@@ -39,13 +37,13 @@ public class LoginController {
   }
 
   @PostMapping("/register")
-  public String processRegistration(User user, Model model){
+  public ModelAndView processRegistration(User user, ModelMap model){
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     String encodedPassword = encoder.encode(user.getPassword());
     user.setPassword(encodedPassword);
     user.setRole("STAFF");
     userRepository.save(user);
     model.addAttribute("success", "success create user");
-    return "index";
+    return new ModelAndView("redirect:/login", model);
   }
 }
