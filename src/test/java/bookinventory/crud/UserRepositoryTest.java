@@ -48,6 +48,5 @@ public class UserRepositoryTest {
     @Test
     public void testUpdateUser(){
         User user = new User();
-
     }
 }
