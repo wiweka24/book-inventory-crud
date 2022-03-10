@@ -10,5 +10,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
     Iterable<User> findByNameContains(String keyword);
+
+    @Query(value = "SELECT count(id) FROM books", nativeQuery = true)
+    Integer countBook();
+
 }
     

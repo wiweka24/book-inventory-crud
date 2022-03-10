@@ -121,4 +121,9 @@ public class UserServiceImpl implements UserService {
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public Integer countBook(){
+        return userRepository.countBook();
+    }
 }

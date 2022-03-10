@@ -18,4 +18,6 @@ public interface UserService {
     void deleteUserById(Long id);
 
     Iterable<User> findByName(String keyword);
+
+    Integer countBook();
 }
