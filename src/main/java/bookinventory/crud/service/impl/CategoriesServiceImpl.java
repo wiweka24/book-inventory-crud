@@ -42,4 +42,8 @@ public class CategoriesServiceImpl implements CategoriesService {
   public void deleteCategoriesById(Long id) {
     categoriesRepository.deleteById(id);
   }
+
+  public Integer countCategory(){
+    return categoriesRepository.countCategory();
+  }
 }

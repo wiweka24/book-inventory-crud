@@ -11,4 +11,5 @@ public interface CategoriesService {
   Categories getCategoriesById(Long id);
   Categories updateCategories(Categories categories);
   void deleteCategoriesById(Long id);
+  Integer countCategory();
 }
