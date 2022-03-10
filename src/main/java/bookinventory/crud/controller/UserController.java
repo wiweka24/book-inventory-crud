@@ -80,13 +80,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @PostMapping("/search")
-    public String search(SearchFormData searchFormData, Model model){
-        model.addAttribute("searchForm", searchFormData);
-        model.addAttribute("users", userService.findByName(searchFormData.getKeyword()));
-        return "users";
-    }
-
+    
     public String encodePassword(String password, User user){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
