@@ -82,4 +82,9 @@ public class BookServiceImpl implements BookService{
 	public void deleteBookById(Long id) {
 		bookRepository.deleteById(id);	
 	}
+
+	@Override
+	public Integer countBook(){
+		return bookRepository.countBook();
+	}
 }
