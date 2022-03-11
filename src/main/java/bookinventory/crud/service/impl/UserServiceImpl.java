@@ -26,11 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> findByName(String keyword) {
-        return userRepository.findByNameContains(keyword);
-    }
-
-    @Override
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -122,7 +117,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer countBook(){
-        return userRepository.countBook();
+    public Integer countUser(){
+        return userRepository.countUser();
     }
 }
