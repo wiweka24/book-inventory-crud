@@ -18,5 +18,5 @@ Hai MP 25 BCA Hackaton Project
   5. Kemudian buka aplikasi melalui browser pada "**http://localhost:8000/**"
 
 ### Disclaimer
- 1. Projek ini berkajalan pada local database sehingga untuk menjalankan projek ini anda harus terlebih dahulu membuat database bernama bookINV padsa komputer anda
- 2. Projek ini berkajalan pada local database komputer kalian, jike terjadi errr saat menjalankan file dengan jar makan masuk ke "book-inventory-crud\src\main\resources" dan atur  nama database serta ussername dan password database anda baru kemudian build dan run kembali.
+ 1. Projek ini berjalan pada local database sehingga untuk menjalankan projek ini anda harus terlebih dahulu membuat database bernama bookINV padsa komputer anda
+ 2. Projek ini berjalan pada local database komputer kalian, jike terjadi errr saat menjalankan file dengan jar makan masuk ke "book-inventory-crud\src\main\resources" dan atur  nama database serta ussername dan password database anda baru kemudian build dan run kembali.
